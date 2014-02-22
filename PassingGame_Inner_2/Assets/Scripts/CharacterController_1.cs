@@ -10,11 +10,18 @@ public class CharacterController_1 : MonoBehaviour {
 	public GameObject selfLayer2;
 	public GameObject selfLayer3;
 
+	public float splayDistance;
+
+	public GameObject invisibleLeader;
 
 
+	void Start(){
+		print (selfLayer1.transform.localPosition);
+	}
 
 	void  Update () {
 
+		print (selfLayer1.transform.localPosition);
 
 		if (Input.GetKey (KeyCode.UpArrow))
 			rigidbody.AddForce (Vector3.up * 5);
@@ -27,18 +34,20 @@ public class CharacterController_1 : MonoBehaviour {
 
 
 		if (Input.GetKey (KeyCode.Space)) {
-			ShowLayers ();
+			SplayShuffle ();
 		}
 	}
 		
 
 
 
-	void ShowLayers(){
-		print ("show space running");
+	void SplayShuffle(){
+		//print (selfLayer1.transform.localPosition);
 
-		//selfLayer1.transform.position.x = transform.position.x-1;
-		//selfLayer2.transform.position.x = transform.position.x-2;
+		//selfLayer1.transform.position.y += splayDistance;
 
+		selfLayer1.transform.position = new Vector3 (invisibleLeader.transform.position.x, (invisibleLeader.transform.position.y + splayDistance), (Random.Range(0,3)/10));
+		selfLayer2.transform.position = new Vector3 ((invisibleLeader.transform.position.x - splayDistance), invisibleLeader.transform.position.y, (Random.Range(0,3)/10));
+		selfLayer3.transform.position = new Vector3 (invisibleLeader.transform.position.x + splayDistance, invisibleLeader.transform.position.y, (Random.Range(0,3)/10));
 	}
 }
