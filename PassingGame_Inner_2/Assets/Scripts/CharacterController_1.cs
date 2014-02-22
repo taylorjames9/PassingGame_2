@@ -10,16 +10,19 @@ public class CharacterController_1 : MonoBehaviour {
 	public GameObject selfLayer2;
 	public GameObject selfLayer3;
 
-	public float splayDistance;
+	public float layerOrder;
+
+	public float forceSplay;
 
 	public GameObject invisibleLeader;
 
 
 	void Start(){
 		print (selfLayer1.transform.localPosition);
+		forceSplay = 0.000005f;
 	}
 
-	void  Update () {
+	void  FixedUpdate () {
 
 		print (selfLayer1.transform.localPosition);
 
@@ -35,19 +38,53 @@ public class CharacterController_1 : MonoBehaviour {
 
 		if (Input.GetKey (KeyCode.Space)) {
 			SplayShuffle ();
-		}
+		} 
 	}
-		
-
-
 
 	void SplayShuffle(){
-		//print (selfLayer1.transform.localPosition);
 
-		//selfLayer1.transform.position.y += splayDistance;
+		selfLayer1.rigidbody.velocity = new Vector3 (0, 10, 0);
+		selfLayer2.rigidbody.velocity = new Vector3 (10, 0, 0);
+		selfLayer3.rigidbody.velocity = new Vector3 (-10, 0, 0);
 
-		selfLayer1.transform.position = new Vector3 (invisibleLeader.transform.position.x, (invisibleLeader.transform.position.y + splayDistance), (Random.Range(0,3)/10));
-		selfLayer2.transform.position = new Vector3 ((invisibleLeader.transform.position.x - splayDistance), invisibleLeader.transform.position.y, (Random.Range(0,3)/10));
-		selfLayer3.transform.position = new Vector3 (invisibleLeader.transform.position.x + splayDistance, invisibleLeader.transform.position.y, (Random.Range(0,3)/10));
+		StartCoroutine (StopVelocity ());
+
+	}
+
+	IEnumerator StopVelocity(){
+		yield return new WaitForSeconds(0.1f);
+		selfLayer1.rigidbody.velocity = new Vector3 (0, 0, 0);
+		selfLayer2.rigidbody.velocity = new Vector3 (0, 0, 0);
+		selfLayer3.rigidbody.velocity = new Vector3 (0, 0, 0);
+
+	}
+
+	public float NewTopSelf(){
+			return (Random.Range (0, 3) / 10);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
