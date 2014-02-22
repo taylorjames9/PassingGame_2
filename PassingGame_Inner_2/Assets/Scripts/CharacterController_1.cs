@@ -17,13 +17,13 @@ public class CharacterController_1 : MonoBehaviour {
 
 
 		if (Input.GetKey (KeyCode.UpArrow))
-			rigidbody.AddForce (Vector3.up * 10);
+			rigidbody.AddForce (Vector3.up * 5);
 		if (Input.GetKey (KeyCode.DownArrow))
-			rigidbody.AddForce (Vector3.down * 10);
+			rigidbody.AddForce (Vector3.down * 5);
 		if (Input.GetKey (KeyCode.LeftArrow))
-			rigidbody.AddForce (Vector3.left * 10);
+			rigidbody.AddForce (Vector3.left * 5);
 		if (Input.GetKey (KeyCode.RightArrow))
-			rigidbody.AddForce (Vector3.right * 10);
+			rigidbody.AddForce (Vector3.right * 5);
 
 
 		if (Input.GetKey (KeyCode.Space)) {
