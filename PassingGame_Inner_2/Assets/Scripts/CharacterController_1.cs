@@ -18,6 +18,12 @@ public class CharacterController_1 : MonoBehaviour {
 
 	public float forceSplay;
 
+	public bool spaceDown;
+	public bool ranSplayOnce;
+	public bool addVelocity;
+
+	public float spaceBarDampening;
+
 	public GameObject invisibleLeader;
 
 
@@ -29,14 +35,11 @@ public class CharacterController_1 : MonoBehaviour {
 		selfLayerScript2 = selfLayer2.GetComponent<UnderLayerScript>();
 		selfLayerScript3 = selfLayer3.GetComponent<UnderLayerScript>();
 
-
-
-
 	}
 
 	void  FixedUpdate () {
 
-		print (selfLayer1.transform.localPosition);
+		//print (selfLayer1.transform.localPosition);
 
 		if (Input.GetKey (KeyCode.UpArrow))
 			rigidbody.AddForce (Vector3.up * 5);
@@ -48,16 +51,27 @@ public class CharacterController_1 : MonoBehaviour {
 			rigidbody.AddForce (Vector3.right * 5);
 
 
-		if (Input.GetKeyUp (KeyCode.Space)) {
+		if (Input.GetKey (KeyCode.Space)) {
+			spaceDown = true; 
 			SplayShuffle ();
-		} 
+			//ranSplayOnce = true;
+
+		} else {
+			spaceDown = false;
+		}
 	}
 
 	void SplayShuffle(){
 
-		selfLayer1.rigidbody.velocity = new Vector3 (0, 10, 0);
-		selfLayer2.rigidbody.velocity = new Vector3 (10, 0, 0);
-		selfLayer3.rigidbody.velocity = new Vector3 (-10, 0, 0);
+		print(Time.deltaTime);
+
+		//if (!addVelocity) {
+		selfLayer1.rigidbody.velocity = new Vector3 (0, (10-(Time.deltaTime*spaceBarDampening)), 0);
+		selfLayer2.rigidbody.velocity = new Vector3 ((10-(Time.deltaTime*spaceBarDampening)), 0, 0);
+		selfLayer3.rigidbody.velocity = new Vector3 ((-10+(Time.deltaTime*spaceBarDampening)), 0, 0);
+			addVelocity = true; 
+			StartCoroutine(AddVelocityTimer ());
+		//}
 
 		/*selfLayer1.transform.position = new Vector3 (selfLayer1.transform.position.x, selfLayer1.transform.position.y,selfLayer2.transform.position.z);
 		selfLayer2.transform.position = new Vector3 (selfLayer2.transform.position.x, selfLayer2.transform.position.y,selfLayer3.transform.position.z);
@@ -102,6 +116,12 @@ public class CharacterController_1 : MonoBehaviour {
 
 	public float NewTopSelf(){
 			return (Random.Range (0, 3) / 10);
+	}
+
+	IEnumerator AddVelocityTimer(){
+		yield return new WaitForSeconds (1.0f);
+		addVelocity = false;
+
 	}
 }
 

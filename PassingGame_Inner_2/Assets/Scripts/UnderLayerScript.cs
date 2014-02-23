@@ -12,8 +12,13 @@ public class UnderLayerScript : MonoBehaviour {
 
 		private Vector3 velocity = Vector3.zero;
 		public string gameObjectName;
+		public GameObject CharContrllObject;
+		CharacterController_1 CharContrllScript;
 
 	void Start (){
+
+
+		CharContrllScript = CharContrllObject.GetComponent<CharacterController_1>();
 
 		gameObjectName = gameObject.transform.name;
 
@@ -34,9 +39,9 @@ public class UnderLayerScript : MonoBehaviour {
 	}
 		void Update() {
 
-		//if(!Input.GetKeyDown (KeyCode.Space)){
+		if(!CharContrllScript.spaceDown){
 			Vector3 targetPosition = new Vector3 (target.transform.position.x, target.transform.position.y, zOffSet);
 			transform.position = Vector3.SmoothDamp (transform.position, targetPosition, ref velocity, smoothTime);
-		//	}*/
+			}
 		}
 }
