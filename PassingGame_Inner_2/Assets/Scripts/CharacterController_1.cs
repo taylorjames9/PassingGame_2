@@ -63,15 +63,36 @@ public class CharacterController_1 : MonoBehaviour {
 		selfLayer2.transform.position = new Vector3 (selfLayer2.transform.position.x, selfLayer2.transform.position.y,selfLayer3.transform.position.z);
 		selfLayer3.transform.position = new Vector3 (selfLayer3.transform.position.x, selfLayer3.transform.position.y,selfLayer1.transform.position.z);*/
 
-		selfLayerScript1.zOffSet = selfLayerScript2.zOffSet;
-		selfLayerScript2.zOffSet = selfLayerScript3.zOffSet;
-		selfLayerScript3.zOffSet = selfLayerScript1.zOffSet;
-
 		StartCoroutine (StopVelocity ());
 
 	}
 
 	IEnumerator StopVelocity(){
+
+		float zOffSetBeforeShift_1 = selfLayerScript1.zOffSet;
+		float zOffSetBeforeShift_2 = selfLayerScript2.zOffSet;
+		float zOffSetBeforeShift_3 = selfLayerScript3.zOffSet;
+
+		selfLayerScript1.zOffSet = zOffSetBeforeShift_2;
+		selfLayerScript2.zOffSet = zOffSetBeforeShift_3;
+		selfLayerScript3.zOffSet = zOffSetBeforeShift_1;
+
+		float smoothTimeBeforeShift_1 = selfLayerScript1.smoothTime;
+		float smoothTimeBeforeShift_2 = selfLayerScript2.smoothTime;
+		float smoothTimeBeforeShift_3 = selfLayerScript3.smoothTime;
+
+		selfLayerScript1.smoothTime = smoothTimeBeforeShift_2; 
+		selfLayerScript2.smoothTime = smoothTimeBeforeShift_3; 
+		selfLayerScript3.smoothTime = smoothTimeBeforeShift_1; 
+
+		float followDistanceChooseNewLayer_BeforeShift_1 = selfLayerScript1.followDistanceChooseNewLayer;
+		float followDistanceChooseNewLayer_BeforeShift_2 = selfLayerScript2.followDistanceChooseNewLayer;
+		float followDistanceChooseNewLayer_BeforeShift_3 = selfLayerScript3.followDistanceChooseNewLayer;
+
+		selfLayerScript1.followDistanceChooseNewLayer = followDistanceChooseNewLayer_BeforeShift_2;
+		selfLayerScript2.followDistanceChooseNewLayer = followDistanceChooseNewLayer_BeforeShift_3;
+		selfLayerScript3.followDistanceChooseNewLayer = followDistanceChooseNewLayer_BeforeShift_1;
+
 		yield return new WaitForSeconds(0.1f);
 		selfLayer1.rigidbody.velocity = new Vector3 (0, 0, 0);
 		selfLayer2.rigidbody.velocity = new Vector3 (0, 0, 0);
