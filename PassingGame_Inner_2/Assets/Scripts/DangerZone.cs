@@ -35,7 +35,7 @@ public class DangerZone : MonoBehaviour {
 
 
 	IEnumerator ScreenBlinkRed(){
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (1.0f);
 		/*Camera.main.backgroundColor = color1;
 		yield return new WaitForSeconds (1.0f);
 		Camera.main.backgroundColor = color2;
@@ -43,17 +43,17 @@ public class DangerZone : MonoBehaviour {
 
 		float t = Mathf.PingPong(Time.time, duration) / duration;
 		Camera.main.backgroundColor = Color.Lerp(color1, color2, t);
-		yield return new WaitForSeconds (2.0f);
+		yield return new WaitForSeconds (1.0f);
 	}
 
 	IEnumerator StopScreenBlinkRed(){
 		//yield return new WaitForSeconds (1.0f);
 
 		StopCoroutine ("ScreenBlinkRed");
-		yield return new WaitForSeconds (0.5f);
+		yield return new WaitForSeconds (0f);
 
 		Camera.main.backgroundColor = Color.Lerp(Camera.main.backgroundColor, color2, 3.0f);
-
+		yield return new WaitForSeconds (0f);
 		//Camera.main.backgroundColor = color2;
 
 	}
