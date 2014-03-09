@@ -14,9 +14,14 @@ public class CharacterController_1 : MonoBehaviour {
 	UnderLayerScript selfLayerScript2;
 	UnderLayerScript selfLayerScript3;
 
+	public Texture[] myTypesOfSpeech; 
+	public GameObject mainCharacterSpeechPlane;
+
 	public float layerOrder;
 
 	public float forceSplay;
+
+	public GameObject myTopSelf;
 
 	public bool spaceDown;
 	public bool ranSplayOnce;
@@ -34,6 +39,8 @@ public class CharacterController_1 : MonoBehaviour {
 		selfLayerScript1 = selfLayer1.GetComponent<UnderLayerScript>();
 		selfLayerScript2 = selfLayer2.GetComponent<UnderLayerScript>();
 		selfLayerScript3 = selfLayer3.GetComponent<UnderLayerScript>();
+
+		mainCharacterSpeechPlane.SetActive (false);
 
 	}
 
@@ -79,6 +86,29 @@ public class CharacterController_1 : MonoBehaviour {
 
 		StartCoroutine (StopVelocity ());
 
+		NewTopSelf ();
+
+		if (myTopSelf == selfLayer1) {
+			mainCharacterSpeechPlane.renderer.material.mainTexture = myTypesOfSpeech [0];
+		} else if (myTopSelf == selfLayer2) {
+			mainCharacterSpeechPlane.renderer.material.mainTexture= myTypesOfSpeech [1];
+		} else if (myTopSelf == selfLayer3) {
+			mainCharacterSpeechPlane.renderer.material.mainTexture = myTypesOfSpeech [2];
+		}
+	}
+
+	void OnTriggerStay(Collider other){
+		if (Input.GetKey (KeyCode.Space)) {
+
+			mainCharacterSpeechPlane.SetActive (true);
+		}
+	}
+
+	void OnTriggerExit(Collider other){
+		//if (Input.GetKey (KeyCode.Space)) {
+
+		mainCharacterSpeechPlane.SetActive (false);
+		//}
 	}
 
 	IEnumerator StopVelocity(){
@@ -114,8 +144,21 @@ public class CharacterController_1 : MonoBehaviour {
 
 	}
 
-	public float NewTopSelf(){
-			return (Random.Range (0, 3) / 10);
+	public GameObject NewTopSelf(){
+			
+		if(selfLayer1.transform.position.z == 0.0f){
+			myTopSelf = selfLayer1;
+		}
+
+		else if(selfLayer2.transform.position.z == 0.0f){
+			myTopSelf = selfLayer2;
+		}
+
+		else if(selfLayer3.transform.position.z == 0.0f){
+			myTopSelf = selfLayer3;
+
+		}
+		return myTopSelf;
 	}
 
 	IEnumerator AddVelocityTimer(){
@@ -124,21 +167,6 @@ public class CharacterController_1 : MonoBehaviour {
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
