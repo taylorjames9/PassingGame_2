@@ -4,8 +4,6 @@ using System.Collections;
 public class BlueEnemyScript : MonoBehaviour {
 
 
-
-
 	//If the state is greenChaseState, then find a random greenGuy to chase. If theTarget becomes null. Choose a new target from greenguylist attached to aiInstantiatorScript.
 
 
@@ -24,13 +22,8 @@ public class BlueEnemyScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
-		//mainGuyScript = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
 		aiSetterScript = GameObject.Find("aiManager").GetComponent<aiInstantiator>();
-		//greenManList
-
 		invisibleBaseScript = GameObject.Find("InvisibleBaseManager").GetComponent<InvisibleBaseSetter>();
-
 		mainGuy = GameObject.Find ("TheSelf");
 
 		print (theTarget);
