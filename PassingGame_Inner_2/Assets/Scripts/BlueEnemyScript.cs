@@ -19,6 +19,7 @@ public class BlueEnemyScript : MonoBehaviour {
 	GameObject mainGuy;
 	public string targetChosen; 
 	aiInstantiator aiSetterScript;
+	InvisibleBaseSetter invisibleBaseScript;
 
 
 	// Use this for initialization
@@ -27,6 +28,8 @@ public class BlueEnemyScript : MonoBehaviour {
 		//mainGuyScript = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
 		aiSetterScript = GameObject.Find("aiManager").GetComponent<aiInstantiator>();
 		//greenManList
+
+		invisibleBaseScript = GameObject.Find("InvisibleBaseManager").GetComponent<InvisibleBaseSetter>();
 
 		mainGuy = GameObject.Find ("TheSelf");
 
@@ -40,7 +43,6 @@ public class BlueEnemyScript : MonoBehaviour {
 		if (StateManager.currentGameState == StateManager.GameState.redChaseState) {
 			if (theTarget != null && targetChosen != "Red") {
 				WipeTheSlate ();
-				print ("wipetheSlate() just ran");
 			}
 
 			if (theTarget == null) {
@@ -49,7 +51,6 @@ public class BlueEnemyScript : MonoBehaviour {
 			if (theTarget != null && targetChosen == "Red") {
 				if (theTarget.gameObject.tag == "redMain" || theTarget.gameObject.tag == "redTeamMate") {
 					ChaseTheTarget ();
-
 				}
 			}
 		}
@@ -59,17 +60,26 @@ public class BlueEnemyScript : MonoBehaviour {
 				WipeTheSlate ();
 				print ("wipetheSlate() just ran");
 			}
-
 			if (theTarget == null) {
 				ChooseAGreenGuyToChase ();
-				print ("ChooseAGreenTarget just ran");
-				//targetChosen++;
 			} 
 			if (theTarget != null && targetChosen == "Green") {
 				ChaseTheTarget();
+			}
+		}
 
+		if (StateManager.currentGameState == StateManager.GameState.blueChaseState) {
+			if (theTarget != null && targetChosen != "Base") {
+				WipeTheSlate ();
 			}
 
+			if (theTarget == null) {
+				ChooseAnInvisibleBase ();
+				print ("ChooseABase just ran");
+			} 
+			if (theTarget != null && targetChosen == "Base") {
+				ChaseTheTarget();
+			}
 		}
 	}
 
@@ -98,6 +108,13 @@ public class BlueEnemyScript : MonoBehaviour {
 		theTarget = theGreenMansTransform;
 		targetChosen = "Green";
 
+	}
+
+	public void ChooseAnInvisibleBase (){
+		GameObject theBaseIChoose = invisibleBaseScript.invisibleBaseList [Random.Range (0, invisibleBaseScript.invisibleBaseList.Count)];
+		Transform theBaseTransform = theBaseIChoose.transform;
+		theTarget = theBaseTransform;
+		targetChosen = "Base";
 	}
 
 
