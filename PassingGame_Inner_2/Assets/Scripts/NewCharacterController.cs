@@ -24,13 +24,13 @@ public class NewCharacterController : MonoBehaviour {
 
 	
 		if (Input.GetKey (KeyCode.UpArrow))
-			rigidbody.AddForce (Vector3.up * 5);
+			rigidbody.AddForce (Vector3.up * 35);
 		if (Input.GetKey (KeyCode.DownArrow))
-			rigidbody.AddForce (Vector3.down * 5);
+			rigidbody.AddForce (Vector3.down * 35);
 		if (Input.GetKey (KeyCode.LeftArrow))
-			rigidbody.AddForce (Vector3.left * 5);
+			rigidbody.AddForce (Vector3.left * 35);
 		if (Input.GetKey (KeyCode.RightArrow))
-			rigidbody.AddForce (Vector3.right * 5);
+			rigidbody.AddForce (Vector3.right * 35);
 
 		if (Input.GetKeyDown (KeyCode.Space) && stopGateForSpaceDown ==0 ) {
 			stopGateForSpaceDown++;
@@ -40,17 +40,23 @@ public class NewCharacterController : MonoBehaviour {
 				transform.renderer.material.color = Color.red;
 				myVisibleColor = "Red";
 				print ("myVisibleColor" + myVisibleColor);
+				gameObject.tag = "redMain";
+				print ("my tag is now: " + gameObject.tag);
 
 				break;
 			case 1:
 				transform.renderer.material.color = Color.green;
 				myVisibleColor = "Green";
 				print("myVisibleColor" + myVisibleColor);
+				gameObject.tag = "greenMain";
+				print ("my tag is now: " + gameObject.tag);
 				break;
 			case 2:
 				transform.renderer.material.color = Color.blue;
 				myVisibleColor = "Blue";
 				print("myVisibleColor" + myVisibleColor);
+				gameObject.tag = "blueMain";
+				print ("my tag is now: " + gameObject.tag);
 				break;
 			default: 
 
