@@ -14,12 +14,12 @@ public class switcherPickUpScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-		//if (col.tag == "redMain" || col.tag == "greenMain" || col.tag == "blueMain") {
+		if (col.tag == "redMain" || col.tag == "greenMain" || col.tag == "blueMain") {
 
 		StateManager.currentGameState = StateManager.RandomChaseStateChooser ();
 		Destroy (gameObject);
 		ResourceManager.numResources--;
 		print (ResourceManager.numResources);
-		//}
+		}
 	}
 }

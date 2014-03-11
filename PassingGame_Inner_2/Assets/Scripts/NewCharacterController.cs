@@ -98,7 +98,7 @@ public class NewCharacterController : MonoBehaviour {
 		}
 	}
 
-	public void OnCollisionEnter(Collision otherCol){
+	/*public void OnCollisionEnter(Collision otherCol){
 		if (StateManager.currentGameState == StateManager.GameState.redChaseState ) {
 			if (otherCol.gameObject.tag == "blue" || otherCol.gameObject.tag == "green") { 
 				if (!iAmSafe) {
@@ -115,7 +115,7 @@ public class NewCharacterController : MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 	void OnTriggerStay(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = true;
