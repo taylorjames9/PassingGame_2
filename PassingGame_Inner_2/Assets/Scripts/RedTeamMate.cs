@@ -128,13 +128,13 @@ public class RedTeamMate : MonoBehaviour {
 			}
 		}
 	}
-	void OnCollisionStay(Collision other) {
+	void OnTriggerStay(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = true;
 		}
 
 	}
-	void OnCollisionExit(Collision other) {
+	void OnTriggerExit(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = false;
 		}

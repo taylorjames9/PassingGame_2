@@ -27,6 +27,8 @@ public class StateManager : MonoBehaviour {
 	void Update () {
 
 		print (currentGameState); 
+		//timer.text = Time.time.ToString();
+
 
 		switch(currentGameState){
 		case GameState.redChaseState:
@@ -76,4 +78,6 @@ public class StateManager : MonoBehaviour {
 		}
 		return currentGameState;
 	}
+
+
 }

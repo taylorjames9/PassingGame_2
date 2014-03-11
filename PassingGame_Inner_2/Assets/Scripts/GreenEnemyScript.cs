@@ -135,20 +135,20 @@ public class GreenEnemyScript : MonoBehaviour {
 	public void OnCollisionEnter(Collision otherCol){
 		if (StateManager.currentGameState == StateManager.GameState.greenChaseState ) {
 			if (!iAmSafe) {
-				if (otherCol.gameObject.tag == "redMain" || otherCol.gameObject.tag == "greenMain" || otherCol.gameObject.tag == "blueMain" || otherCol.gameObject.tag == "blue") { 
+				if (otherCol.gameObject.tag == "redMain" || otherCol.gameObject.tag == "greenMain" || otherCol.gameObject.tag == "blueMain" || otherCol.gameObject.tag == "blue" || otherCol.gameObject.tag == "redTeamMate") { 
 					aiSetterScript.greenManList.Remove (gameObject);
 					Destroy (gameObject);
 				}
 			}
 		}
 	}
-	void OnCollisionStay(Collision other) {
+	void OnTriggerStay(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = true;
 		}
 
 	}
-	void OnCollisionExit(Collision other) {
+	void OnTriggerExit(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = false;
 		}

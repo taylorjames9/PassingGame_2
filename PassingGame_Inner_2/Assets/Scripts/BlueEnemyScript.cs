@@ -134,7 +134,7 @@ public class BlueEnemyScript : MonoBehaviour {
 
 	public void OnCollisionEnter(Collision otherCol){
 		if (StateManager.currentGameState == StateManager.GameState.blueChaseState ) {
-			if (otherCol.gameObject.tag == "redMain" || otherCol.gameObject.tag == "greenMain" || otherCol.gameObject.tag == "blueMain" ||otherCol.gameObject.tag == "green") { 
+			if (otherCol.gameObject.tag == "redMain" || otherCol.gameObject.tag == "greenMain" || otherCol.gameObject.tag == "blueMain" ||otherCol.gameObject.tag == "green" || otherCol.gameObject.tag == "redTeamMate") { 
 				if (!iAmSafe) {
 					aiSetterScript.blueManList.Remove (gameObject);
 					Destroy (gameObject);
@@ -142,13 +142,13 @@ public class BlueEnemyScript : MonoBehaviour {
 			}
 		}
 	}
-	void OnCollisionStay(Collision other) {
+	void OnTriggerStay(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = true;
 		}
 
 	}
-	void OnCollisionExit(Collision other) {
+	void OnTriggerExit(Collider other) {
 		if(other.gameObject.tag == "base"){
 			iAmSafe = false;
 		}

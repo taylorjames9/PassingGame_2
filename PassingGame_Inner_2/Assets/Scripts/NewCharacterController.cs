@@ -9,12 +9,18 @@ public class NewCharacterController : MonoBehaviour {
 	TrueColor trueColorScript;
 	public string myVisibleColor;
 	private int stopGateForSpaceDown;
+	public bool iAmSafe;
+	public	TextMesh gameOverText;
+	public GameObject gameOverBlackOBJ;
 
 
 	// Use this for initialization
 	void Start () {
 		myVisibleColor = "Red";
 		trueColorScript = trueColorOBJ.GetComponent<TrueColor>();
+
+		//gameOverText.renderer.enabled = false;
+		//gameOverBlackOBJ.SetActive (false);
 
 	}
 	
@@ -89,6 +95,36 @@ public class NewCharacterController : MonoBehaviour {
 		default:
 
 			break;
+		}
+	}
+
+	public void OnCollisionEnter(Collision otherCol){
+		if (StateManager.currentGameState == StateManager.GameState.redChaseState ) {
+			if (otherCol.gameObject.tag == "blue" || otherCol.gameObject.tag == "green") { 
+				if (!iAmSafe) {
+					//gameOverText.SetActive (true);
+					//gameOverText.renderer.SetActive (false);
+					//gameOverText.renderer.enabled = true;
+					//gameOverText.transform.position.z = 0.5f;
+					//gameOverBlackOBJ.SetActive (true);
+					//gameObject.SetActive (false);
+
+					Application.LoadLevel("GameOverScreen");
+
+
+				}
+			}
+		}
+	}
+	void OnTriggerStay(Collider other) {
+		if(other.gameObject.tag == "base"){
+			iAmSafe = true;
+		}
+
+	}
+	void OnTriggerExit(Collider other) {
+		if(other.gameObject.tag == "base"){
+			iAmSafe = false;
 		}
 	}
 
