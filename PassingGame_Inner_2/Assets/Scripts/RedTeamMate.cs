@@ -19,6 +19,7 @@ public class RedTeamMate : MonoBehaviour {
 	public string targetChosen; 
 	aiInstantiator aiSetterScript;
 	InvisibleBaseSetter invisibleBaseScript;
+	public bool iAmSafe;
 
 	// Use this for initialization
 	void Start () {
@@ -71,19 +72,31 @@ public class RedTeamMate : MonoBehaviour {
 	}
 
 	public void ChooseAGreenGuyToChase (){
-		GameObject theGreenManIChoose = aiSetterScript.greenManList [Random.Range (0, aiSetterScript.greenManList.Count)];
-		Transform theGreenMansTransform = theGreenManIChoose.transform;
-		theTarget = theGreenMansTransform;
-		targetChosen = "Green";
-
+		if (aiSetterScript.greenManList.Count > 0) {
+			GameObject theGreenManIChoose = aiSetterScript.greenManList [Random.Range (0, aiSetterScript.greenManList.Count)];
+			Transform theGreenMansTransform = theGreenManIChoose.transform;
+			theTarget = theGreenMansTransform;
+			targetChosen = "Green";
+		} else if (aiSetterScript.blueManList.Count == 0) {
+			GameObject theBaseIChoose = invisibleBaseScript.invisibleBaseList [Random.Range (0, invisibleBaseScript.invisibleBaseList.Count)];
+			Transform theBaseTransform = theBaseIChoose.transform;
+			theTarget = theBaseTransform;
+			targetChosen = "Base";
+		}
 	}
 
 	public void ChooseABlueGuyToChase (){
-		GameObject theBlueManIChoose = aiSetterScript.blueManList [Random.Range (0, aiSetterScript.blueManList.Count)];
-		Transform theBlueMansTransform = theBlueManIChoose.transform;
-		theTarget = theBlueMansTransform;
-		targetChosen = "Blue";
-
+		if (aiSetterScript.blueManList.Count > 0) {
+			GameObject theBlueManIChoose = aiSetterScript.blueManList [Random.Range (0, aiSetterScript.blueManList.Count)];
+			Transform theBlueMansTransform = theBlueManIChoose.transform;
+			theTarget = theBlueMansTransform;
+			targetChosen = "Blue";
+		} else if (aiSetterScript.blueManList.Count == 0) {
+				GameObject theBaseIChoose = invisibleBaseScript.invisibleBaseList [Random.Range (0, invisibleBaseScript.invisibleBaseList.Count)];
+				Transform theBaseTransform = theBaseIChoose.transform;
+				theTarget = theBaseTransform;
+				targetChosen = "Base";
+			}
 	}
 
 	public void ChooseAnInvisibleBase (){
@@ -105,6 +118,25 @@ public class RedTeamMate : MonoBehaviour {
 		theTarget = null;
 		//targetChosen = false;
 	}
+	public void OnCollisionEnter(Collision otherCol){
+		if (StateManager.currentGameState == StateManager.GameState.redChaseState ) {
+			if (otherCol.gameObject.tag == "green" || otherCol.gameObject.tag == "blue") { 
+				if (!iAmSafe) {
+					aiSetterScript.teamMateList.Remove (gameObject);
+					Destroy (gameObject);
+				}
+			}
+		}
+	}
+	void OnCollisionStay(Collision other) {
+		if(other.gameObject.tag == "base"){
+			iAmSafe = true;
+		}
 
-
+	}
+	void OnCollisionExit(Collision other) {
+		if(other.gameObject.tag == "base"){
+			iAmSafe = false;
+		}
+	}
 }

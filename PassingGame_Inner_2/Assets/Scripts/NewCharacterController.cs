@@ -24,13 +24,13 @@ public class NewCharacterController : MonoBehaviour {
 
 	
 		if (Input.GetKey (KeyCode.UpArrow))
-			rigidbody.AddForce (Vector3.up * 35);
+			rigidbody.AddForce (Vector3.up * 45);
 		if (Input.GetKey (KeyCode.DownArrow))
-			rigidbody.AddForce (Vector3.down * 35);
+			rigidbody.AddForce (Vector3.down * 45);
 		if (Input.GetKey (KeyCode.LeftArrow))
-			rigidbody.AddForce (Vector3.left * 35);
+			rigidbody.AddForce (Vector3.left * 45);
 		if (Input.GetKey (KeyCode.RightArrow))
-			rigidbody.AddForce (Vector3.right * 35);
+			rigidbody.AddForce (Vector3.right * 45);
 
 		if (Input.GetKeyDown (KeyCode.Space) && stopGateForSpaceDown ==0 ) {
 			stopGateForSpaceDown++;
@@ -91,23 +91,5 @@ public class NewCharacterController : MonoBehaviour {
 			break;
 		}
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -21,6 +21,8 @@ public class GreenEnemyScript : MonoBehaviour {
 	public string targetChosen; 
 	aiInstantiator aiSetterScript;
 	InvisibleBaseSetter invisibleBaseScript;
+	public bool iAmSafe;
+
 
 	// Use this for initialization
 	void Start () {
@@ -96,10 +98,17 @@ public class GreenEnemyScript : MonoBehaviour {
 	}
 
 	public void ChooseABlueGuyToChase (){
-		GameObject theBlueManIChoose = aiSetterScript.blueManList [Random.Range (0, aiSetterScript.blueManList.Count)];
-		Transform theBlueMansTransform = theBlueManIChoose.transform;
-		theTarget = theBlueMansTransform;
-		targetChosen = "Blue";
+		if (aiSetterScript.blueManList.Count > 0) {
+			GameObject theBlueManIChoose = aiSetterScript.blueManList [Random.Range (0, aiSetterScript.blueManList.Count)];
+			Transform theBlueMansTransform = theBlueManIChoose.transform;
+			theTarget = theBlueMansTransform;
+			targetChosen = "Blue";
+		} else if (aiSetterScript.blueManList.Count == 0) {
+			GameObject theBaseIChoose = invisibleBaseScript.invisibleBaseList [Random.Range (0, invisibleBaseScript.invisibleBaseList.Count)];
+			Transform theBaseTransform = theBaseIChoose.transform;
+			theTarget = theBaseTransform;
+			targetChosen = "Base";
+		}
 
 	}
 
@@ -122,4 +131,27 @@ public class GreenEnemyScript : MonoBehaviour {
 		theTarget = null;
 		//targetChosen = false;
 	}
+
+	public void OnCollisionEnter(Collision otherCol){
+		if (StateManager.currentGameState == StateManager.GameState.greenChaseState ) {
+			if (!iAmSafe) {
+				if (otherCol.gameObject.tag == "redMain" || otherCol.gameObject.tag == "greenMain" || otherCol.gameObject.tag == "blueMain" || otherCol.gameObject.tag == "blue") { 
+					aiSetterScript.greenManList.Remove (gameObject);
+					Destroy (gameObject);
+				}
+			}
+		}
+	}
+	void OnCollisionStay(Collision other) {
+		if(other.gameObject.tag == "base"){
+			iAmSafe = true;
+		}
+
+	}
+	void OnCollisionExit(Collision other) {
+		if(other.gameObject.tag == "base"){
+			iAmSafe = false;
+		}
+	}
+
 }
