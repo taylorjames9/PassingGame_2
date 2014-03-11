@@ -28,7 +28,7 @@ public class TrueColor : MonoBehaviour {
 
 	public void AmountRedIncrease (){
 		if (amountRed < 1) {
-			amountRed = amountRed + (Time.deltaTime/50); 
+			amountRed = amountRed + (Time.deltaTime/35); 
 			//print (amountRed);
 		}
 
@@ -36,7 +36,7 @@ public class TrueColor : MonoBehaviour {
 
 	public void AmountGreenIncrease (){
 		if (amountGreen < 1) {
-			amountGreen = amountGreen + (Time.deltaTime/50); 
+			amountGreen = amountGreen + (Time.deltaTime/35); 
 			//print (amountGreen);
 		}
 
@@ -44,7 +44,7 @@ public class TrueColor : MonoBehaviour {
 
 	public void AmountBlueIncrease (){
 		if (amountBlue < 1) {
-			amountBlue = amountBlue + (Time.deltaTime/50); 
+			amountBlue = amountBlue + (Time.deltaTime/35); 
 			//print (amountBlue);
 		}
 
@@ -52,14 +52,14 @@ public class TrueColor : MonoBehaviour {
 
 	public void AmountRedDecrease (){
 		if (amountRed > 0) {
-			amountRed = amountRed - (Time.deltaTime/50); 
+			amountRed = amountRed - (Time.deltaTime/35); 
 			//print (amountRed);
 		}
 	}
 
 	public void AmountGreenDecrease (){
 		if (amountGreen > 0) {
-			amountGreen = amountGreen - (Time.deltaTime/50); 
+			amountGreen = amountGreen - (Time.deltaTime/35); 
 			//print (amountGreen);
 		}
 
@@ -67,7 +67,7 @@ public class TrueColor : MonoBehaviour {
 
 	public void AmountBlueDecrease (){
 		if (amountBlue > 0) {
-			amountBlue = amountBlue - (Time.deltaTime/50); 
+			amountBlue = amountBlue - (Time.deltaTime/35); 
 			//print (amountBlue);
 		}
 

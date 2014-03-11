@@ -9,6 +9,11 @@ public class ReplayBtnScript : MonoBehaviour {
 		Application.LoadLevel("PassingGame_Scene1");
 
 
+		if(Input.GetKeyDown(KeyCode.Space)){
+			Application.LoadLevel("PassingGame_Scene1");
+
+		}
+
 	}
 
 }

@@ -14,6 +14,13 @@ public class StateManager : MonoBehaviour {
 	public GameObject topViewGreen;
 	public GameObject topViewBlue;
 
+	public TextMesh redTeamNumLeft;
+	public TextMesh greenTeamNumLeft;
+	public TextMesh blueTeamNumLeft;
+
+	aiInstantiator aiSetterScript;
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -21,6 +28,8 @@ public class StateManager : MonoBehaviour {
 		topViewGreen.SetActive (false);
 		topViewBlue.SetActive (false);
 		currentGameState = GameState.redChaseState; 
+
+		aiSetterScript = GameObject.Find("aiManager").GetComponent<aiInstantiator>();
 	}
 
 	// Update is called once per frame
@@ -28,6 +37,17 @@ public class StateManager : MonoBehaviour {
 
 		print (currentGameState); 
 		//timer.text = Time.time.ToString();
+
+		redTeamNumLeft.text = ("R " + aiSetterScript.teamMateList.Count.ToString());
+		greenTeamNumLeft.text = ("G " + aiSetterScript.greenManList.Count.ToString());
+		blueTeamNumLeft.text = ("B " + aiSetterScript.blueManList.Count.ToString());
+
+
+
+		if(aiSetterScript.greenManList.Count == 0 &&  aiSetterScript.blueManList.Count == 0){
+			redTeamNumLeft.text = "Red Wins";
+
+		}
 
 
 		switch(currentGameState){
